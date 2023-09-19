@@ -1,0 +1,26 @@
+{
+  "name": "scDHA-cell-clustering",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nluu1/scDHA-cell-clustering.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nluu1/scDHA-cell-clustering/issues"
+  },
+  "homepage": "https://github.com/nluu1/scDHA-cell-clustering#readme",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1",
+    "path": "^0.12.7"
+  }
+}
