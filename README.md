@@ -1,2 +1,1 @@
-# scDHA-app
-App to visualize scDHA clustering results
+# scDHA-cell-clustering

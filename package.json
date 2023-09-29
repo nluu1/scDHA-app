@@ -18,9 +18,14 @@
   },
   "homepage": "https://github.com/nluu1/scDHA-cell-clustering#readme",
   "dependencies": {
+    "child_process": "^1.0.2",
+    "csvtojson": "^2.0.10",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "fs": "^0.0.1-security",
     "multer": "^1.4.5-lts.1",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "r-integration": "^2.4.0",
+    "r-script": "0.0.4"
   }
 }
