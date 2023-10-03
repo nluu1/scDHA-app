@@ -21,9 +21,9 @@
 ## Require for r-script to be run by nodejs
 needs(scDHA)
 needs(torch)
-print("Installing packages")
-torch::install_torch()
-library("scDHA")
+# # print("Installing packages")
+# # torch::install_torch()
+# library("scDHA")
 
 # Get sample data
 data('Goolam'); data <- t(Goolam$data); label <- as.character(Goolam$label)

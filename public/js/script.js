@@ -84,9 +84,6 @@ $(document).ready(function () {
             tableBody.append(row);
           });
 
-
-          let table = new DataTable("#result-table");
-
         }
       },
 
@@ -102,6 +99,99 @@ $(document).ready(function () {
     });
   });
 
+  $("#convertBtn").on("click", function () {
+    let imgWidth = $("#width").val();
+    let imgHeight = $("#height").val();
+    let postData = {
+      imgWidth: imgWidth,
+      imgHeight: imgHeight,
+    };
+    console.log(postData);
+
+
+    
+    $("#convertBtn").append(
+      '<div class="spinner-border spinner-border-sm" role="status"></div>'
+    );
+    $("#convertBtn").prop("disabled", true);
+
+    $.ajax({
+      url: "/convert",
+      type: "POST", // You can change the HTTP method if needed
+      dataType: "json", // Change the dataType based on your response type (e.g., "json" or "html")
+      data: postData,
+      success: function (data) {
+        // Handle the successful response here
+
+        console.log(data);
+        if (data && data.imagePath) {
+            $("#cluster-image").attr("src", data.imagePath);
+            $("#cluster-image-download").attr("href", data.imagePath);
+         }
+
+        // Remove the spinner and update the button text
+        $("#convertBtn").text("Convert");
+        $("#convertBtn").prop("disabled", false);
+        // if (data && data.imagePath && data.csvPath) {
+        //   // Update the src attribute of the image element
+        //   $("#cluster-image").attr("src", data.imagePath);
+        //   $("#cluster-image-download").attr("href", data.imagePath);
+        //   // $("#cluster-image").removeClass('d-none');
+
+        //   console.log(data.csvPath);
+        //   const tableHeaders = $("#table-header");
+        //   const tableBody = $("#table-body");
+
+        //   tableHeaders.empty();
+        //   tableBody.empty();
+
+        //   // Get the keys (table headers) from the first data item
+        //   const headers = Object.keys(data.csvJson[0]);
+
+        //   // Create a table row for headers
+        //   const headerRow = $("<tr>");
+
+        //   // Iterate over the headers to create table header cells
+        //   headers.forEach((header) => {
+        //     const th = $("<th>").text(header);
+        //     headerRow.append(th);
+        //   });
+
+        //   // Append the header row to the table headers
+        //   tableHeaders.append(headerRow);
+
+        //   // Iterate over the data and create table rows
+        //   data.csvJson.forEach((item) => {
+        //     const row = $("<tr>");
+
+        //     // Iterate over the headers to create table cells
+        //     headers.forEach((header) => {
+        //       const cell = $("<td>").text(item[header]);
+        //       row.append(cell);
+        //     });
+
+        //     tableBody.append(row);
+        //   });
+
+        //   let table = new DataTable("#result-table");
+        // }
+      },
+
+      error: function (error) {
+        // Handle errors here
+        alert("Error occurred!");
+        console.error(error);
+
+        // Remove the spinner and update the button text
+        $("#convertBtn").text("Convert");
+        $("#convertBtn").prop("disabled", false);
+      },
+    });
+
+
+
+  });
+    
   {
     $("#updateForm").on("submit", function (event) {
       event.preventDefault();

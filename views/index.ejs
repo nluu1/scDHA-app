@@ -46,24 +46,12 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-5">
-                <div class="row g-1">
-                    <div class="col">
-                        <input type="text" class="form-control" placeholder="Enter Height" aria-label="Height">
-                    </div>
-                    <div class="col">
-                        <input type="text" class="form-control" placeholder="Enter Width" aria-label="Width">
-                    </div>
-                    <button id="downloadBtn" type="button" class="col btn btn-primary">Download
-                    </button>
-                </div>
 
-            </div>
         </div>
         <div class="col-sm-10">
             <!-- Display the generated PNG image -->
             <div class="row">
-                <div class="col mt-5">
+                <div class="col-md-auto mt-5">
                     <div id="img-container" class="">
                         <% if (imagePath) { %>
                         <!-- Display the image if imagePath is defined -->
@@ -72,29 +60,48 @@
                                 src="data:image/jpeg;base64,<%= imagePath.toString('base64') %>" alt="Uploaded Image">
                         </a>
                         <% } else { %>
-                        <!-- Display a placeholder or message if imagePath is not defined -->
-                        <!-- <p>No clustering result available.</p> -->
+                        
                         <a id="cluster-image-download" href="https://placehold.co/600x400?text=Scatter\nPlot" download>
                             <img id="cluster-image" class="" src="https://placehold.co/600x400?text=Scatter\nPlot"
                                 alt="Cluster Image">
                         </a>
+                        <p>Click Image to Download</p>
                         <% } %>
                     </div>
+                    <div class="mt-5">
+                        <div class="row g-1">
+                            <div class="col">
+                                <input type="text" id="height" class="form-control" placeholder="Height" aria-label="Height">
+                            </div>
+                            <div class="col">
+                                <input type="text" id="width" class="form-control" placeholder="Width" aria-label="Width">
+                            </div>
+                            <button id="convertBtn" type="button" class="col btn btn-primary">Convert
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div id="table-container" class="col mt-5">
+                <div id="table-container" class="col mt-5 ">
                     <table id="result-table" class="table table-bordered table-hover">
                         <thead id="table-header">
                             <tr>
                                 <!-- Table header will be inserted here -->
+                                <td>Gene_ID</td>
+                                <td>Cell_Cluster</td>
                             </tr>
                         </thead>
                         <tbody id="table-body">
                             <!-- Table data will be inserted here -->
+                            <td>Data</td>
+                            <td>Data</td>
                         </tbody>
                     </table>
+                    <div class="mt-5">
+                         <button id="downloadBtn" type="button" class="col btn btn-primary">Download (.tsv)
+                            </button>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
     <script src="/js/script.js"></script>

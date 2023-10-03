@@ -4,6 +4,7 @@ const path = require("path"); // Include the path module
 const Rintegration = require("r-integration");
 const Rscript = require("r-script");
 const csv = require("csvtojson");
+const sharp = require("sharp");
 
 const {
     exec
@@ -18,6 +19,8 @@ const storage = multer.memoryStorage();
 const upload = multer({
     storage
 });
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Serve static files from the "public" folder
 app.use(express.static(path.join(__dirname, "public"))); // Use path.join to construct the correct path
@@ -61,7 +64,19 @@ app.post("/generate", async (req, res) => {
     });
 
     console.log("here");
-    const jsonArray = await csv().fromFile(r_csvPath);
+    console.log(r_csvPath);
+    console.log(r_imagePath);
+    if (fs.existsSync(r_csvPath)) {
+      console.log(r_csvPath +" exists");
+    }
+    let jsonArray = {};
+    try {
+      jsonArray = await csv().fromFile(r_csvPath);
+      // Your code to handle jsonArray
+    } catch (error) {
+      console.error("Error reading CSV file:", error);
+      // Handle the error gracefully, send an error response, etc.
+    }
 
 
     const finalImagePath = r_imagePath.replace("./public", "");
@@ -108,6 +123,31 @@ app.post("/upload", upload.single("file"), (req, res) => {
             imagePath: filePath, // Send the path where the file was saved
         });
     });
+});
+
+app.post("/convert", async (req, res) => {
+  try {
+    let imgWidth = parseInt(req.body.imgWidth);
+    let imgHeight = parseInt(req.body.imgHeight);
+    const r_imagePath = "./public/images/cluster.png";
+
+    // Resize the image using sharp
+    await sharp(r_imagePath)
+      .resize(imgWidth, imgHeight, {
+        fit: 'fill'
+      })
+      .toFile("./public/images/convertedcluster.png");
+
+    let convertimg = "./public/images/convertedcluster.png";
+    const finalImagePath = convertimg.replace("./public", "");
+    console.log(finalImagePath);
+    res.json({
+      imagePath: finalImagePath,
+    });
+  } catch (error) {
+    console.error("Error occurred:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 app.listen(port, () => {
