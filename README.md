@@ -1,4 +1,4 @@
-# scDHA-cell-clustering
+# scDHA-app
 a web application that utilizes the scDHA package to analyze single-cell data  
 The app allows:
 - Ask users to select the input by either:
