@@ -83,7 +83,7 @@ $(document).ready(function () {
 
             tableBody.append(row);
           });
-
+          let table = new DataTable("#result-table");
         }
       },
 
